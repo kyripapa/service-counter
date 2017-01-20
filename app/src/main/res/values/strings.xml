@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Notify Service</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="notificationtitle">Android Notification Tutorial</string>
+    <string name="notificationtext">Notification Text</string>
+    <string name="notificationticker">Notification Ticker</string>
+    <string name="customnotificationtitle">Android Notification Tutorial</string>
+    <string name="customnotificationtext">Custom Notification Text</string>
+    <string name="customnotificationticker">Custom Notification Ticker</string>
+    <string name="lbltitle">"Title : "</string>
+    <string name="lbltext">"Text : "</string>
+    <string name="notification">Notification</string>
+    <string name="customnotification">Custom Notification</string>
+
+</resources>

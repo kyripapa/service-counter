@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="10dp"
+            android:lineSpacingExtra="10sp"
+            android:text="Ερωτηματολόγιο (1/3)"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="normal|bold" />
+
+        <TextView
+            android:id="@+id/question"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="10dp"
+            android:text="Το τελευταίο notification:"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+
+    <RelativeLayout android:layout_height="100dp"
+        android:layout_width="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_alignParentTop="true">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="61dp"
+                android:layout_gravity="fill"
+                android:text="Ανοίξατε την εφαρμογή που έβγαλε την ειδοποίηση ή απλά σβήσατε την ειδοποίηση; " />
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout android:layout_height="100dp"
+    android:layout_width="match_parent">
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checkedButton="1"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="6dp"
+            android:layout_marginStart="6dp">
+
+            <RadioButton
+                android:id="@+id/checkBox4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="έσβησα την ειδοποίηση"
+                android:layout_weight="1" />
+
+            <RadioButton
+                android:id="@+id/checkBox3"
+                android:layout_width="204dp"
+                android:layout_height="wrap_content"
+                android:text="άνοιξα την εφαρμογή " />
+
+        </RadioGroup>
+    </RelativeLayout>
+
+    <RelativeLayout android:layout_height="100dp"
+        android:layout_width="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_alignParentTop="true">
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_gravity="fill"
+                android:text="Ήσασταν απασχολημένος με κάποια άλλη εργασία ή δραστηριότητα όταν ήρθε η ειδοποίηση;" />
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout android:layout_height="100dp"
+        android:layout_width="match_parent">
+
+        <RadioGroup
+            android:id="@+id/radioGroup1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="34dp"
+            android:checkedButton="1"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/checkBox5"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="ΝΑΙ" />
+
+            <RadioButton
+                android:id="@+id/checkBox6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ΟΧΙ" />
+        </RadioGroup>
+    </RelativeLayout>
+
+    <Button
+        android:text="Επόμενο"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="pageTwo"
+        android:id="@+id/next1" />
+</LinearLayout>
