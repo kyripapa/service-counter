@@ -4,16 +4,16 @@ import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.notifyservice.R;
 
 public class ResultActivity extends Activity {
-    String title;
-    String text;
-    TextView txttitle;
-    TextView txttext;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,23 +25,49 @@ public class ResultActivity extends Activity {
         // Dismiss Notification
         notificationmanager.cancel(0);
 
-        /*// Retrive the data from MainActivity.java
-        Intent i = getIntent();
 
-        title = i.getStringExtra("title");
-        text = i.getStringExtra("text");
-
-        // Locate the TextView
-        txttitle = (TextView) findViewById(R.id.title);
-        txttext = (TextView) findViewById(R.id.text);
-
-        // Set the data into TextView
-        txttitle.setText(title);
-        txttext.setText(text);*/
     }
     public void pageTwo(View view)
     {
+        RadioButton rb;
+        RadioButton stayedNot;
+        RadioButton wasBusy;
+        RadioButton wasNotBusy;
+        rb = (RadioButton) findViewById(R.id.deletedNot);
+        stayedNot = (RadioButton) findViewById(R.id.stayedNot);
+        wasBusy = (RadioButton)findViewById(R.id.wasBusy);
+        wasNotBusy = (RadioButton) findViewById(R.id.wasNotBusy);
+        String notificationStayed;
+        String busyOrNot;
+        if(rb.isChecked() == true) {
+            notificationStayed = "Deleted";
+            Log.d("Notification: ", "deleted");
+        }
+       else {
+            notificationStayed = "Notification opened";
+        }
+        if(wasBusy.isChecked() == true) {
+             busyOrNot = "I was busy";
+        }
+        else {
+            busyOrNot = "I was not busy";
+        }
+
+
+
+
+
         Intent intent = new Intent(ResultActivity.this, QpageTwo.class);
+
+        //Create the bundle
+        Bundle bundle = new Bundle();
+
+        //Add your data to bundle
+        bundle.putString("First answer", notificationStayed);
+        bundle.putString("Second answer", busyOrNot);
+
+        //Add the bundle to the intent
+        intent.putExtras(bundle);
 
         startActivity(intent);
         overridePendingTransition(R.anim.enter, R.anim.exit);

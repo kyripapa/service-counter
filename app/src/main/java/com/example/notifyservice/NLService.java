@@ -94,20 +94,6 @@ public class NLService extends NotificationListenerService {
         Log.i("NLService", "NLService destroyed!");
     }
 
-    /* > API 21
-    @Override
-    public void onListenerDisconnected() {
-        super.onListenerDisconnected();
-        Log.w("NLService", "Notification listener DISCONNECTED from the notification service! Scheduling a reconnect...");
-        // requestRebind(new ComponentName(this.getPackageName(), this.getClass().getCanonicalName()));
-    }
-
-    @Override
-    public void onListenerConnected() {
-        super.onListenerConnected();
-        Log.w("NLService", "Notification listener connected with the notification service!");
-    }
-    */
 
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
@@ -118,7 +104,38 @@ public class NLService extends NotificationListenerService {
         i.putExtra("notification_event", "onNotificationPosted :" + sbn.getPackageName() + "\n");
         sendBroadcast(i);
 
+        /*Pass the package name*/
+        // inside Screen2.java
+
+        i.putExtra("packageName", sbn.getPackageName());
+
         nAdded++;
+//Count the hours that have passed
+        Date dateTwo = null;
+
+        dateTwo = new Date(System.currentTimeMillis());
+        ;
+       /* System.out.println("Date 1" + pdate + "date2" + dateTwo);*/
+        long timeDiff = Math.abs(pdate.getTime() - dateTwo.getTime());
+        int hours = (int) ((timeDiff / (1000 * 60 * 60)) % 24);
+        /*System.out.println("Hours" + hours);
+        System.out.println("difference:" + timeDiff);   // difference: 0*/
+        if (hours == 0) {
+            System.out.println("done");
+            pdate = dateTwo;
+            System.out.println("new currentdate" + pdate);
+
+//            And then count the notifications
+            if (nAdded > temp) {
+                System.out.println("reached" + temp);
+                temp = temp + 5;
+                System.out.println(temp);
+
+//            Create a notification
+                sendNotification();
+            }
+        }
+
 
         broadcastStatus();
     }

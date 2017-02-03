@@ -27,7 +27,11 @@
         </service>
 
         <activity android:name=".QpageTwo" />
-        <activity android:name=".QpageThree"></activity>
+        <activity android:name=".QpageThree" />
+        <activity
+            android:name=".thankYouPage"
+            android:label="@string/title_activity_thank_you_page"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

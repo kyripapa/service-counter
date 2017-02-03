@@ -14,5 +14,6 @@
     <string name="lbltext">"Text : "</string>
     <string name="notification">Notification</string>
     <string name="customnotification">Custom Notification</string>
+    <string name="title_activity_thank_you_page">thankYouPage</string>
 
 </resources>
