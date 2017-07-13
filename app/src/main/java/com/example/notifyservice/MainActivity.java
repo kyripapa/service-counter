@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         //starting service
 
 
+
         startService(intent);
 
 
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Intent i = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+
         startActivity(i);
         //setting button click
         findViewById(R.id.btn_start_service).setOnClickListener(new View.OnClickListener() {
@@ -71,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
         // register broadcast receiver for the intent MyTaskStatus
         LocalBroadcastManager.getInstance(this).registerReceiver(MyReceiver, new IntentFilter(NLService.ACTION_STATUS_BROADCAST));
 
-
     }
 
 
@@ -80,7 +82,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.i("MainActivity", "Broadcast Recieved: "+intent.getStringExtra("serviceMessage"));
+
             String message = intent.getStringExtra("serviceMessage");
+
+
             Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
         }
     };
@@ -93,6 +98,11 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
 
         LocalBroadcastManager.getInstance(this).unregisterReceiver(MyReceiver);
+    }
+    public void sendDB(View view){
+
+        getApplicationContext().sendBroadcast(
+                new Intent(getApplicationContext(), UploadDataReceiver.class));
     }
 
 }

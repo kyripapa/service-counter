@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
+import android.os.Bundle;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.support.annotation.RequiresApi;
@@ -53,6 +54,7 @@ public class NLService extends NotificationListenerService {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         //retrieving data from the received intent
+        if(intent!=null) {}
         if (intent.hasExtra("command")) {
             Log.i("NLService", "Started for command '" + intent.getStringExtra("command"));
             broadcastStatus();
@@ -63,6 +65,8 @@ public class NLService extends NotificationListenerService {
         }
         super.onStartCommand(intent, flags, startId);
 
+
+
         // NOTE: We return STICKY to prevent the automatic service termination
         return START_STICKY;
     }
@@ -71,6 +75,7 @@ public class NLService extends NotificationListenerService {
         Log.i("NLService", "Broadcasting status added(" + nAdded + ")/removed(" + nRemoved + ")");
         Intent i1 = new Intent(ACTION_STATUS_BROADCAST);
         i1.putExtra("serviceMessage", "Added: " + nAdded + " | Removed: " + nRemoved);
+
         LocalBroadcastManager.getInstance(this).sendBroadcast(i1);
         // sendBroadcast(i1);
 
@@ -100,17 +105,15 @@ public class NLService extends NotificationListenerService {
 
         Log.i(TAG, "**********  onNotificationPosted");
         Log.i(TAG, "ID :" + sbn.getId() + "t" + sbn.getNotification().tickerText + "\t" + sbn.getPackageName());
-        Intent i = new Intent("com.example.notify.NOTIFICATION_LISTENER_EXAMPLE");
-        i.putExtra("notification_event", "onNotificationPosted :" + sbn.getPackageName() + "\n");
-        sendBroadcast(i);
+        Intent i = new Intent("com.example.notifyservice.NLService_Status");
+        i.putExtra("notification_event", sbn.getPackageName() + "\n");
+        i.putExtra("nAdded", nAdded);
+        String packageName = sbn.getPackageName();
 
-        /*Pass the package name*/
-        // inside Screen2.java
+        LocalBroadcastManager.getInstance(this).sendBroadcast(i);
 
-        i.putExtra("packageName", sbn.getPackageName());
-
-        nAdded++;
-//Count the hours that have passed
+         nAdded++;
+        //Count the hours that have passed
         Date dateTwo = null;
 
         dateTwo = new Date(System.currentTimeMillis());
@@ -118,9 +121,10 @@ public class NLService extends NotificationListenerService {
        /* System.out.println("Date 1" + pdate + "date2" + dateTwo);*/
         long timeDiff = Math.abs(pdate.getTime() - dateTwo.getTime());
         int hours = (int) ((timeDiff / (1000 * 60 * 60)) % 24);
-        /*System.out.println("Hours" + hours);
-        System.out.println("difference:" + timeDiff);   // difference: 0*/
-        if (hours == 0) {
+        System.out.println("Hours:" + hours);
+        /*System.out.println("Hours" + hours);*/
+        /*System.out.println("difference:" + timeDiff);   // difference: 0*/
+        if (hours >= 0) {
             System.out.println("done");
             pdate = dateTwo;
             System.out.println("new currentdate" + pdate);
@@ -131,24 +135,23 @@ public class NLService extends NotificationListenerService {
                 temp = temp + 5;
                 System.out.println(temp);
 
+                System.out.println("This:" + packageName);
 //            Create a notification
-                sendNotification();
+                sendNotification(sbn);
             }
         }
-
 
         broadcastStatus();
     }
 
-
-    public void sendNotification() {
-
+    public void sendNotification(StatusBarNotification sbn) {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_stat_name)
                         .setContentTitle("NotifyService")
-                        .setContentText("Θα απαντήσετε σε μερικές ερωτήσεις;");
+                        .setContentText("Θα απαντήσετε σε μερικές ερωτήσεις;").setAutoCancel(true);
         Intent intent = new Intent(this, ResultActivity.class);
+        intent.putExtra("packname", sbn.getPackageName());
         PendingIntent resultPendingIntent =
                 PendingIntent.getActivity(
                         this,

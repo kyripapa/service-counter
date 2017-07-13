@@ -41,7 +41,7 @@
 
     </LinearLayout>
 
-    <RelativeLayout android:layout_height="100dp"
+    <RelativeLayout android:layout_height="36dp"
         android:layout_width="match_parent">
 
         <LinearLayout
@@ -54,7 +54,7 @@
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
-                android:layout_height="61dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="fill"
                 android:text="Αφορούσε εφαρμογή η οποία είναι προτεραιότητα για εσάς ή σημαντική;" />
 
@@ -64,8 +64,8 @@
 
     </RelativeLayout>
 
-    <RelativeLayout android:layout_height="100dp"
-        android:layout_width="match_parent">
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="60dp">
 
         <RadioGroup
             android:id="@+id/radioGroup"
@@ -77,30 +77,31 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginLeft="6dp"
-            android:layout_marginStart="6dp">
+            android:layout_marginStart="6dp"
+            android:weightSum="1">
 
             <RadioButton
                 android:id="@+id/wasImportant"
-                android:layout_width="match_parent"
+                android:layout_width="280dp"
                 android:layout_height="wrap_content"
-                android:text="NAI"
-                android:layout_weight="1" />
+                android:text="NAI" />
 
             <RadioButton
                 android:id="@+id/wasNotImportant"
                 android:layout_width="204dp"
                 android:layout_height="wrap_content"
-                android:text="OXI" />
+                android:text="OXI"
+                android:layout_weight="0.78" />
 
         </RadioGroup>
     </RelativeLayout>
 
-    <RelativeLayout android:layout_height="100dp"
-        android:layout_width="match_parent">
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="50dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="1"
             android:layout_alignParentTop="true">
@@ -108,9 +109,10 @@
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
-                android:layout_height="60dp"
+                android:layout_height="43dp"
                 android:layout_gravity="fill"
-                android:text="6.	Θεωρήσατε την ειδοποίηση ενοχλητική;" />
+                android:text="6.	Θεωρήσατε την ειδοποίηση ενοχλητική;"
+                android:layout_weight="0.44" />
 
 
         </LinearLayout>
@@ -118,32 +120,33 @@
 
     </RelativeLayout>
 
-    <RelativeLayout android:layout_height="100dp"
+    <RelativeLayout android:layout_height="wrap_content"
         android:layout_width="match_parent">
 
         <RadioGroup
             android:id="@+id/radioGroup1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="34dp"
             android:checkedButton="1"
             android:gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:weightSum="1">
 
             <RadioButton
                 android:id="@+id/wasAnnoying"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="ΝΑΙ" />
+                android:text="ΝΑΙ"
+                android:layout_weight="0.73" />
 
             <RadioButton
                 android:id="@+id/wasNotAnnoying"
-                android:layout_width="match_parent"
+                android:layout_width="212dp"
                 android:layout_height="wrap_content"
-                android:text="ΟΧΙ" />
+                android:text="ΟΧΙ"
+                android:layout_weight="0.19" />
         </RadioGroup>
     </RelativeLayout>
 

@@ -15,18 +15,23 @@
         android:id="@+id/btn_start_service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Report"/>
-
+        android:text="Αναφορα"
+        android:layout_marginBottom="40dp" />
 
 
     <ScrollView android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="103dp"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/btnListNotify"
         android:layout_below="@+id/btnListNotify"
         android:layout_alignLeft="@+id/btnListNotify">
 
 
-
+        <Button
+            android:text="Στείλε τα δεδομένα (χρειάζεσαι σύνδεση internet)"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button"
+            android:onClick="sendDB"/>
     </ScrollView>
 </LinearLayout>

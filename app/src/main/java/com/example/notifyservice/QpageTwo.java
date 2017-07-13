@@ -44,6 +44,7 @@ public class QpageTwo extends AppCompatActivity {
         //Extract the data…
         String firstAnswer = bundle.getString("First answer");
         String secondAnswer = bundle.getString("Second answer");
+        String packageName = bundle.getString("Package");
         Log.d("First: ", firstAnswer);
 
 
@@ -53,6 +54,7 @@ public class QpageTwo extends AppCompatActivity {
         bundle.putString("Second answer", secondAnswer);
         bundle.putString("Third answer", importantNot);
         bundle.putString("Fourth answer", annoyingNot);
+        bundle.putString("Package", packageName);
 
         //Add the bundle to the intent
         intent.putExtras(bundle);

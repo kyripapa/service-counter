@@ -55,7 +55,7 @@ public class Notification {
     public void setSecondAnswer(String secondAnswer) {
         this.secondAnswer = secondAnswer;
     }
-    public void setThirdAnswer(String secondAnswer) {
+    public void setThirdAnswer(String thirdAnswer) {
         this.thirdAnswer = thirdAnswer;
     }
     public void setFourthAnswer(String fourthAnswer) {

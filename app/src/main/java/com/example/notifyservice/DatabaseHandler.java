@@ -1,11 +1,23 @@
 package com.example.notifyservice;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Bundle;
+import android.os.Environment;
+import android.preference.PreferenceManager;
+import android.provider.Settings;
+import android.util.Log;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.channels.FileChannel;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,13 +25,16 @@ import java.util.List;
 
 
 public class DatabaseHandler extends SQLiteOpenHelper {
+    private static final String TAG = DatabaseHandler.class.toString();
 
+    static String id;
     // All Static variables
+
     // Database Version
     private static final int DATABASE_VERSION = 2;
 
     // Database Name
-    private static final String DATABASE_NAME = "managerN";
+    public static final String DATABASE_NAME = "managerN";
 
     // Contacts table name
     private static final String TABLE_CONTACTS = "notificationsM";
@@ -37,6 +52,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
+        context.getApplicationContext();
+        id = Settings.Secure.getString(context.getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+
     }
 
     // Creating Tables
@@ -107,6 +126,53 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         // return contact list
         return contactList;
+    }
+
+
+    /**
+     * Save database to a file
+     * @param c the application context
+     * @return the path to which the database file was saved
+     */
+    public static String exportDB(Context c)
+    {
+
+        System.out.println("Device: " + id);
+        try
+        {
+            // the date formatter - change the date format used in filenames here.
+            SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss");
+
+
+            // get current db path ...
+            File currentDBPath = c.getDatabasePath(DatabaseHandler.DATABASE_NAME);
+            if(!currentDBPath.exists()) {
+                Log.e(TAG, "DATABASE WAS NEVER CREATED - EXPORT SHALL FAIL!");
+            }
+            Log.i(TAG, "Database Path: "+currentDBPath.toString());
+            // get context's cache path
+            File cachePath = c.getCacheDir();
+            Log.i(TAG, "Cache Path: "+cachePath.toString());
+            // setup a temporary file to copy db (safer than sending directly the db file - as db might be modified concurently)
+            File tmpDBPath = File.createTempFile(id, "."+formatter.format(new Date()), cachePath);
+            System.out.println("Path: " + tmpDBPath);
+            Log.i(TAG, "Temporary DB File Path: "+tmpDBPath.toString());
+
+            // copy current database file to the temporary database file
+            Log.i(TAG, "Backing up database '"+DATABASE_NAME+"'...");
+            FileChannel src = new FileInputStream(currentDBPath).getChannel();
+            FileChannel dst = new FileOutputStream(tmpDBPath).getChannel();
+            final long bytesTransferred = dst.transferFrom(src, 0, src.size());
+            Log.i(TAG, "Transferred "+bytesTransferred+"bytes!");
+            src.close();
+            dst.close();
+            return tmpDBPath.toString();
+        } catch (Exception e)
+        {
+            Log.i(TAG, "Failed to export db");
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }
